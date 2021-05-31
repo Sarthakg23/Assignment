@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HOTELBOOKINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BOOKINGS">
+    <Key>
+      <PropertyRef Name="BOOKINGID" />
+    </Key>
+    <Property Name="BOOKINGID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BOOKINGSTATUS" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="USERID" Type="int" Nullable="false" />
+    <Property Name="HOTELID" Type="int" Nullable="false" />
+    <Property Name="BOOKINGDATE" Type="datetime" Nullable="false" />
+    <Property Name="ROOMS" Type="int" Nullable="false" />
+    <Property Name="BOOKEDFROM" Type="datetime" />
+    <Property Name="BOOKEDTILL" Type="datetime" />
+    <Property Name="AMOUNT" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HOTEL">
+    <Key>
+      <PropertyRef Name="HOTELID" />
+    </Key>
+    <Property Name="HOTELID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HOTELNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="HCITY" Type="varchar" MaxLength="50" />
+    <Property Name="HSTATE" Type="varchar" MaxLength="50" />
+    <Property Name="TOTALROOMS" Type="int" />
+    <Property Name="BOOKEDROOMS" Type="int" />
+    <Property Name="ROOMPRICE" Type="real" />
+    <Property Name="CONTACTNO" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIRSTNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LASTNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UPASSWORD" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__BOOKINGS__HOTELI__245D67DE">
+    <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1" />
+    <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOTEL">
+        <PropertyRef Name="HOTELID" />
+      </Principal>
+      <Dependent Role="BOOKINGS">
+        <PropertyRef Name="HOTELID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BOOKINGS__USERID__236943A5">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="BOOKINGS" Type="Self.BOOKINGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="USERID" />
+      </Principal>
+      <Dependent Role="BOOKINGS">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="bookingStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+    <Parameter Name="X" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UPDATE_USER_FIRST_NAME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="USER_ID" Type="int" Mode="In" />
+    <Parameter Name="NAME" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="HOTELBOOKINGModelStoreContainer">
+    <EntitySet Name="BOOKINGS" EntityType="Self.BOOKINGS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOTEL" EntityType="Self.HOTEL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BOOKINGS__HOTELI__245D67DE" Association="Self.FK__BOOKINGS__HOTELI__245D67DE">
+      <End Role="HOTEL" EntitySet="HOTEL" />
+      <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BOOKINGS__USERID__236943A5" Association="Self.FK__BOOKINGS__USERID__236943A5">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

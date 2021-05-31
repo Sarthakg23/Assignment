@@ -1,0 +1,15 @@
+﻿@model  IEnumerable<Hotel_Management.Models.HotelModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Hotels</h2>
+
+<ol>
+    @foreach (var item in Model)
+    {
+    <li>item.HOTELNAME</li>
+    }
+</ol>
+

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HOTELBOOKINGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BOOKING">
+    <Key>
+      <PropertyRef Name="BOOKINGID" />
+    </Key>
+    <Property Name="BOOKINGID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BOOKINGSTATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USERID" Type="Int32" Nullable="false" />
+    <Property Name="HOTELID" Type="Int32" Nullable="false" />
+    <Property Name="BOOKINGDATE" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ROOMS" Type="Int32" Nullable="false" />
+    <Property Name="BOOKEDFROM" Type="DateTime" Precision="3" />
+    <Property Name="BOOKEDTILL" Type="DateTime" Precision="3" />
+    <Property Name="AMOUNT" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HOTEL" Relationship="Self.FK__BOOKINGS__HOTELI__245D67DE" FromRole="BOOKINGS" ToRole="HOTEL" />
+    <NavigationProperty Name="USER" Relationship="Self.FK__BOOKINGS__USERID__236943A5" FromRole="BOOKINGS" ToRole="USERS" />
+  </EntityType>
+  <EntityType Name="HOTEL">
+    <Key>
+      <PropertyRef Name="HOTELID" />
+    </Key>
+    <Property Name="HOTELID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HOTELNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HCITY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HSTATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TOTALROOMS" Type="Int32" />
+    <Property Name="BOOKEDROOMS" Type="Int32" />
+    <Property Name="ROOMPRICE" Type="Single" />
+    <Property Name="CONTACTNO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BOOKINGS" Relationship="Self.FK__BOOKINGS__HOTELI__245D67DE" FromRole="HOTEL" ToRole="BOOKINGS" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIRSTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LASTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UPASSWORD" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BOOKINGS" Relationship="Self.FK__BOOKINGS__USERID__236943A5" FromRole="USERS" ToRole="BOOKINGS" />
+  </EntityType>
+  <Association Name="FK__BOOKINGS__HOTELI__245D67DE">
+    <End Role="HOTEL" Type="Self.HOTEL" Multiplicity="1" />
+    <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HOTEL">
+        <PropertyRef Name="HOTELID" />
+      </Principal>
+      <Dependent Role="BOOKINGS">
+        <PropertyRef Name="HOTELID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BOOKINGS__USERID__236943A5">
+    <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+    <End Role="BOOKINGS" Type="Self.BOOKING" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="USERID" />
+      </Principal>
+      <Dependent Role="BOOKINGS">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HOTELBOOKINGEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BOOKINGS" EntityType="Self.BOOKING" />
+    <EntitySet Name="HOTELs" EntityType="Self.HOTEL" />
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+    <AssociationSet Name="FK__BOOKINGS__HOTELI__245D67DE" Association="Self.FK__BOOKINGS__HOTELI__245D67DE">
+      <End Role="HOTEL" EntitySet="HOTELs" />
+      <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BOOKINGS__USERID__236943A5" Association="Self.FK__BOOKINGS__USERID__236943A5">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="BOOKINGS" EntitySet="BOOKINGS" />
+    </AssociationSet>
+    <FunctionImport Name="UPDATE_USER_FIRST_NAME">
+      <Parameter Name="USER_ID" Mode="In" Type="Int32" />
+      <Parameter Name="NAME" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

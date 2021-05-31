@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HOTELBOOKINGModelStoreContainer" CdmEntityContainer="HOTELBOOKINGEntities">
+    <EntitySetMapping Name="BOOKINGS">
+      <EntityTypeMapping TypeName="HOTELBOOKINGModel.BOOKING">
+        <MappingFragment StoreEntitySet="BOOKINGS">
+          <ScalarProperty Name="BOOKINGID" ColumnName="BOOKINGID" />
+          <ScalarProperty Name="BOOKINGSTATUS" ColumnName="BOOKINGSTATUS" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
+          <ScalarProperty Name="BOOKINGDATE" ColumnName="BOOKINGDATE" />
+          <ScalarProperty Name="ROOMS" ColumnName="ROOMS" />
+          <ScalarProperty Name="BOOKEDFROM" ColumnName="BOOKEDFROM" />
+          <ScalarProperty Name="BOOKEDTILL" ColumnName="BOOKEDTILL" />
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOTELs">
+      <EntityTypeMapping TypeName="HOTELBOOKINGModel.HOTEL">
+        <MappingFragment StoreEntitySet="HOTEL">
+          <ScalarProperty Name="HOTELID" ColumnName="HOTELID" />
+          <ScalarProperty Name="HOTELNAME" ColumnName="HOTELNAME" />
+          <ScalarProperty Name="HCITY" ColumnName="HCITY" />
+          <ScalarProperty Name="HSTATE" ColumnName="HSTATE" />
+          <ScalarProperty Name="TOTALROOMS" ColumnName="TOTALROOMS" />
+          <ScalarProperty Name="BOOKEDROOMS" ColumnName="BOOKEDROOMS" />
+          <ScalarProperty Name="ROOMPRICE" ColumnName="ROOMPRICE" />
+          <ScalarProperty Name="CONTACTNO" ColumnName="CONTACTNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="HOTELBOOKINGModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="UPASSWORD" ColumnName="UPASSWORD" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UPDATE_USER_FIRST_NAME" FunctionName="HOTELBOOKINGModel.Store.UPDATE_USER_FIRST_NAME" />
+  </EntityContainerMapping>
+</Mapping>
